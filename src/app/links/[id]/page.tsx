@@ -2,8 +2,8 @@ import { notFound } from 'next/navigation';
 
 import DynamicLink from '@/models/DynamicLink';
 import dbConnect from '@/db/dbconnect';
-import { getCurrentUser } from '@/app/api/auth/auth';
 import LinkForm from './LinkForm';
+import { getCurrentUser } from '@/auth/auth';
 
 export default async function LinkPage({ params }: { params: { id: string } }) {
   await dbConnect();

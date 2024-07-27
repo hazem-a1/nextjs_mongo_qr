@@ -1,4 +1,4 @@
-import { getCurrentUser } from './api/auth/auth';
+import { getCurrentUser } from '@/auth/auth';
 import FeatureCard from '@/components/FeturedCard';
 import NeonButton from '@/components/NeonButtonLink';
 

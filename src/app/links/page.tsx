@@ -1,10 +1,10 @@
 
 import DynamicLink from '@/models/DynamicLink';
-import { getCurrentUser } from '../api/auth/auth';
 import dbConnect from '@/db/dbconnect';
 import { LinkList } from './LinkList';
 import NeonButton from '@/components/NeonButtonLink';
 import { _id } from '@next-auth/mongodb-adapter';
+import { getCurrentUser } from '@/auth/auth';
 
 
 export default async function LinkListingPage() {

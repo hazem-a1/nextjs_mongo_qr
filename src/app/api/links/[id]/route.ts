@@ -1,8 +1,8 @@
+import { authOptions } from '@/auth/authOptions';
 import dbConnect from '@/db/dbconnect';
 import DynamicLink from '@/models/DynamicLink';
 import { getServerSession } from 'next-auth';
 import { NextRequest, NextResponse } from 'next/server';
-import { authOptions } from '../../auth/[...nextauth]/route';
 
 export async function GET(req: NextRequest,{ params }: { params: { id: string } }) {
   const session = await getServerSession(authOptions);
