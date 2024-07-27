@@ -1,5 +1,4 @@
 import { getCurrentUser } from './api/auth/auth';
-import Head from 'next/head';
 import FeatureCard from '@/components/FeturedCard';
 import NeonButton from '@/components/NeonButtonLink';
 
@@ -8,10 +7,6 @@ export default async function Home() {
   const user = await getCurrentUser();
   return (
     <div className="bg-gray-900 min-h-screen text-white">
-      <Head>
-        <title>QR Star</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
 
       <main className="container mx-auto px-4 py-16">
         <header className="text-center mb-16">
