@@ -82,7 +82,7 @@ const QRDesigner: React.FC<QRDesignerProps> = ({ value, onDesignChange }) => {
       </div>
       <div className="flex space-x-4">
         <div>
-          <label htmlFor="bgColor" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="bgColor" className="block text-sm font-medium text-gray-300">
             Background Color
           </label>
           <input
@@ -94,7 +94,7 @@ const QRDesigner: React.FC<QRDesignerProps> = ({ value, onDesignChange }) => {
           />
         </div>
         <div>
-          <label htmlFor="fgColor" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="fgColor" className="block text-sm font-medium text-gray-300">
             Foreground Color
           </label>
           <input

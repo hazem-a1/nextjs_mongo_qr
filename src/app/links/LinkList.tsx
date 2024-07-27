@@ -37,8 +37,8 @@ export function LinkList({ initialLinks }: { initialLinks: LinkData[] }) {
 
   return (
     <div className="space-y-4">
-      {links.map((link) => (
-        <div key={link._id} className="border p-4 rounded-lg flex justify-between items-center">
+      {links.length ? links.map((link) => (
+        <div key={link._id} className="border p-4 rounded-lg flex justify-between items-center bg-gray-800">
           <div>
             <h2 className="text-lg font-semibold">{link.shortCode}</h2>
             <p className="text-sm text-gray-500">{link.targetUrl}</p>
@@ -53,7 +53,14 @@ export function LinkList({ initialLinks }: { initialLinks: LinkData[] }) {
             </button>
           </div>
         </div>
-      ))}
+      )): 
+      
+        <div className="flex justify-between items-center mb-6">
+        
+          <p className="">No links yet create one now</p>
+          
+        </div>  
+      }
     </div>
   );
 }

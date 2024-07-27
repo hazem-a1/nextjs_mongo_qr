@@ -2,25 +2,42 @@
 import DynamicLink from '@/models/DynamicLink';
 import { getCurrentUser } from '../api/auth/auth';
 import dbConnect from '@/db/dbconnect';
-import { CreateLinkButton } from './CreateLinkButton';
 import { LinkList } from './LinkList';
+import NeonButton from '@/components/NeonButtonLink';
+import { _id } from '@next-auth/mongodb-adapter';
 
 
 export default async function LinkListingPage() {
   const user = await getCurrentUser();
 
   if (!user) {
-    return <div>Please log in to view your dashboard.</div>;
+    return (
+      <div className="max-w-4xl mx-auto mt-8 p-6 rounded-lg shadow-md">
+        <div className="flex flex-col justify-between items-center mb-6">
+      <div>
+      <h1 className="text-4xl font-bold mb-3 animate-pulse text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+      Please log in to view your dashboard.
+      </h1>
+      </div>
+      <div>
+
+      <NeonButton href="/api/auth/signin">Sign In</NeonButton>
+      </div>
+      </div>
+    </div>
+    );
   }
 
   await dbConnect();
   const links = await DynamicLink.find({ createdBy: user.id }).sort({ createdAt: -1 });
 
   return (
-    <div className="max-w-4xl mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
+    <div className="max-w-4xl mx-auto mt-8 p-6 rounded-lg shadow-md">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">Your Links</h1>
-        <CreateLinkButton />
+      <h1 className="text-4xl font-bold mb-3 animate-pulse text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+      Your Links
+          </h1>
+        <NeonButton href="/links/new">Create Link</NeonButton>
       </div>
       <LinkList initialLinks={JSON.parse(JSON.stringify(links))} />
     </div>

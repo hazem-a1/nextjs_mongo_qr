@@ -70,14 +70,14 @@ export default function LinkForm({ initialData }: { initialData: LinkData | null
   };
 
   return (
-    <div className="max-w-2xl mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
-      <h1 className="text-2xl font-bold mb-6">
+    <div className="max-w-2xl mx-auto mt-8 p-6 bg-gray-800 rounded-lg shadow-md">
+      <h1 className="text-2xl font-bold mb-6 ">
         {link._id ? 'Edit Link' : 'Create New Link'}
       </h1>
       {error && <div className="text-red-500 mb-4">{error}</div>}
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label htmlFor="shortCode" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="shortCode" className="block text-sm font-medium text-gray-300">
             Short Code
           </label>
           <input
@@ -87,11 +87,11 @@ export default function LinkForm({ initialData }: { initialData: LinkData | null
             value={link.shortCode}
             onChange={handleInputChange}
             required
-            className="bg-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            className="text-gray-700 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
           />
         </div>
         <div>
-          <label htmlFor="targetUrl" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="targetUrl" className="block text-sm font-medium text-gray-300">
             Target URL
           </label>
           <input
@@ -101,7 +101,7 @@ export default function LinkForm({ initialData }: { initialData: LinkData | null
             value={link.targetUrl}
             onChange={handleInputChange}
             required
-            className="bg-black mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            className="text-gray-700 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
           />
         </div>
         <div>
