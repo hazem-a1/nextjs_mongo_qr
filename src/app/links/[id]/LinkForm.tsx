@@ -106,7 +106,7 @@ export default function LinkForm({ initialData }: { initialData: LinkData | null
         </div>
         <div>
           <h2 className="text-lg font-semibold mb-2">QR Code Design</h2>
-          <QRDesigner value={`http://localhost:3000/api/redirect/${link.shortCode}`} onDesignChange={handleDesignChange} />
+          <QRDesigner value={`${process.env.NEXT_PUBLIC_DOMAIN}/api/redirect/${link.shortCode}`} onDesignChange={handleDesignChange} />
         </div>
         <div>
           <button
