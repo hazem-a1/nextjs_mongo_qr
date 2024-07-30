@@ -9,11 +9,12 @@ import PleaseLoginFirst from '@/components/pleaseLoginFirst';
 
 
 export default async function LinkListingPage() {
+  await dbConnect();
+  
   const user = await getCurrentUser();
 
   if (!user) return <PleaseLoginFirst />
 
-  await dbConnect();
   const links = await DynamicLink.find({ createdBy: user.id }).sort({ createdAt: -1 });
 
   return (

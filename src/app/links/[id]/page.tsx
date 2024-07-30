@@ -8,6 +8,7 @@ import PleaseLoginFirst from '@/components/pleaseLoginFirst';
 
 export default async function LinkPage({ params }: { params: { id: string } }) {
   await dbConnect();
+  
   const user = await getCurrentUser();
 
   if (!user) {

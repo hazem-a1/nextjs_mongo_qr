@@ -2,11 +2,8 @@ import { NextAuthOptions, AuthOptions } from 'next-auth';
 import GithubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
 import { MongoDBAdapter } from '@next-auth/mongodb-adapter';
-import dbConnect from '@/db/dbconnect';
 import clientPromise from '@/db/mongodb';
 
-// Ensure database connection
-dbConnect();
 
 export const authOptions: AuthOptions = {
   providers: [

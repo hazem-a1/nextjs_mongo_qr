@@ -5,12 +5,13 @@ import { getServerSession } from 'next-auth';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(req: NextRequest,{ params }: { params: { id: string } }) {
+  await dbConnect();
+  
   const session = await getServerSession(authOptions);
   if (!session) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
   
-  await dbConnect();
   try {
 
       const {id} = params;
@@ -28,12 +29,13 @@ export async function GET(req: NextRequest,{ params }: { params: { id: string } 
 }
 
 export async function DELETE(req: NextRequest,{ params }: { params: { id: string } }) {
+  await dbConnect();
+
   const session = await getServerSession(authOptions);
   if (!session) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
   
-  await dbConnect();
   try {
 
       const {id} = params;
@@ -55,12 +57,13 @@ export async function DELETE(req: NextRequest,{ params }: { params: { id: string
 
 
 export async function PUT(req: NextRequest,{ params }: { params: { id: string } }) {
+  await dbConnect();
+  
   const session = await getServerSession(authOptions);
   if (!session) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
-  
-  await dbConnect();
+
   try {
     const json = await req.json();
     const { shortCode, targetUrl, qrStyleOptions } = json;

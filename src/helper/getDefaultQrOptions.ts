@@ -37,7 +37,7 @@ export function getDefaultQrOptions(url:string):Options {
                 colorStops:[{ offset: 0, color: '#ededff' }, { offset: 1, color: '#e6e7ff' }]
           },
         },
-        // image: "10cc19bd484118dbcd0a7886a38ceddc.png",
+        image: '',
         cornersSquareOptions: {
             type: "extra-rounded",
             color: "#000000",
