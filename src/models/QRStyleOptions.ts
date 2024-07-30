@@ -7,7 +7,7 @@ const enumMode = ["Numeric" , "Alphanumeric" , "Byte" , "Kanji"]
       type: Number,
       min: 0,
       max: 40,
-      default: 0
+      default: 7
     },
     mode: {
       type: String,
@@ -17,7 +17,7 @@ const enumMode = ["Numeric" , "Alphanumeric" , "Byte" , "Kanji"]
     errorCorrectionLevel: {
       type: String,
       enum: enumErrorCorrectionLevel,
-      default: "H",
+      default: "Q",
     }
   })
   
@@ -25,7 +25,7 @@ const enumMode = ["Numeric" , "Alphanumeric" , "Byte" , "Kanji"]
     hideBackgroundDots: Boolean,
     imageSize: Number,
     crossOrigin: {
-      type: Number,
+      type: String,
       default: "anonymous"
     },
     margin: Number,
@@ -53,7 +53,7 @@ const enumMode = ["Numeric" , "Alphanumeric" , "Byte" , "Kanji"]
     }
   })
   
-  const enumCornersSquareOptions =  ["square" , "dot"]
+  const enumCornersSquareOptions =  ["square" , "dot", "extra-rounded"]
   
   const CornersSquareOptions = new mongoose.Schema({
     color: String,
@@ -61,6 +61,17 @@ const enumMode = ["Numeric" , "Alphanumeric" , "Byte" , "Kanji"]
     type: {
       type: String,
       enum: enumCornersSquareOptions
+    }
+  })
+  
+  const enumCornerDotType = ["square" , "dot"];
+
+  const CornersDotOptions = new mongoose.Schema({
+    color: String,
+    gradient: GradientType,
+    type: {
+      type: String,
+      enum: enumCornerDotType
     }
   })
   
@@ -93,5 +104,6 @@ const enumMode = ["Numeric" , "Alphanumeric" , "Byte" , "Kanji"]
     imageOptions: ImageOptions,
     dotsOptions: DotsOptions,
     cornersSquareOptions: CornersSquareOptions,
-    backgroundOptions: BackgroundOptions
+    backgroundOptions: BackgroundOptions,
+    cornersDotOptions: CornersDotOptions
   })
