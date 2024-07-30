@@ -4,6 +4,7 @@ import DynamicLink from '@/models/DynamicLink';
 import dbConnect from '@/db/dbconnect';
 import LinkForm from './LinkForm';
 import { getCurrentUser } from '@/auth/auth';
+import PleaseLoginFirst from '@/components/pleaseLoginFirst';
 
 export default async function LinkPage({ params }: { params: { id: string } }) {
   await dbConnect();
@@ -11,7 +12,7 @@ export default async function LinkPage({ params }: { params: { id: string } }) {
 
   if (!user) {
     // Redirect to login or show an error
-    return <div>Please log in to view this page.</div>;
+    return <PleaseLoginFirst />
   }
 
   let link = null;

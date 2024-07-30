@@ -63,7 +63,7 @@ export async function PUT(req: NextRequest,{ params }: { params: { id: string } 
   await dbConnect();
   try {
     const json = await req.json();
-    const { shortCode, targetUrl, qrDesign } = json;
+    const { shortCode, targetUrl, qrStyleOptions } = json;
     const { id } = params
       
       // Check if new shortCode already exists (excluding the current link)
@@ -74,7 +74,7 @@ export async function PUT(req: NextRequest,{ params }: { params: { id: string } 
 
       const updatedLink = await DynamicLink.findOneAndUpdate(
         { _id: id, createdBy: session.user.id },
-        { shortCode, targetUrl, qrDesign },
+        { shortCode, targetUrl, qrStyleOptions },
         { new: true, runValidators: true }
       );
       if (!updatedLink) {

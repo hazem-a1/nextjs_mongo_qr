@@ -32,6 +32,11 @@ export default async function Home() {
             description="Seamlessly integrate with your existing workflow"
             icon="🔌"
           />
+          <FeatureCard 
+            title="Easy Login" 
+            description="One Click Login"
+            icon="🤘"
+          />
         </section>
 
         <div className="flex justify-center space-x-8">

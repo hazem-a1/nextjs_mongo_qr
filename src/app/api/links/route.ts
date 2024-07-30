@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
   try {
     const json = await req.json();
     
-    const { shortCode, targetUrl, qrDesign } = json;
+    const { shortCode, targetUrl, qrStyleOptions } = json;
     
     // Check if shortCode already exists
     const existingLink = await DynamicLink.findOne({ shortCode });
@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
     const newLink = new DynamicLink({
       shortCode,
       targetUrl,
-      qrDesign,
+      qrStyleOptions,
       createdBy: session.user.id,
     });
     await newLink.save();

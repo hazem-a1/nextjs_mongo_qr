@@ -2,16 +2,15 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import QRDesigner from '@/components/QRDesigner';
+import QRDesignerStyle from '@/components/QRDesignerStyle';
+import { Options } from 'qr-code-styling';
+import { getDefaultQrOptions } from '@/helper/getDefaultQrOptions';
 
 interface LinkData {
   _id?: string;
   shortCode: string;
   targetUrl: string;
-  qrDesign: {
-    backgroundColor: string;
-    foregroundColor: string;
-  };
+  qrStyleOptions: Options
 }
 
 export default function LinkForm({ initialData }: { initialData: LinkData | null }) {
@@ -21,10 +20,7 @@ export default function LinkForm({ initialData }: { initialData: LinkData | null
     initialData || {
       shortCode: '',
       targetUrl: '',
-      qrDesign: {
-        backgroundColor: '#FFFFFF',
-        foregroundColor: '#000000',
-      },
+      qrStyleOptions: getDefaultQrOptions('')
     }
   );
   const [isLoading, setIsLoading] = useState(false);
@@ -33,10 +29,11 @@ export default function LinkForm({ initialData }: { initialData: LinkData | null
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setLink((prev) => ({ ...prev, [name]: value }));
+    if (name === "targetUrl") setLink((prev) => ({...prev, ["qrStyleOptions.data"]: value}))
   };
 
-  const handleDesignChange = (newDesign: LinkData['qrDesign']) => {
-    setLink((prev) => ({ ...prev, qrDesign: newDesign }));
+  const handleDesignChange = (newDesign: Options) => {
+    setLink((prev) => ({ ...prev, qrStyleOptions: newDesign }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -70,24 +67,26 @@ export default function LinkForm({ initialData }: { initialData: LinkData | null
   };
 
   return (
-    <div className="max-w-2xl mx-auto mt-8 p-6 bg-gray-800 rounded-lg shadow-md">
+    <div className="mx-auto mt-8 p-6 bg-gray-800 rounded-lg shadow-md items-center justify-items-center place-items-center flex flex-col">
       <h1 className="text-2xl font-bold mb-6 ">
         {link._id ? 'Edit Link' : 'Create New Link'}
       </h1>
       {error && <div className="text-red-500 mb-4">{error}</div>}
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
+      <form onSubmit={handleSubmit} className="space-y-4 items-center">
+        <div className='items-center'>
           <label htmlFor="shortCode" className="block text-sm font-medium text-gray-300">
             Short Code
           </label>
           <input
             type="text"
             id="shortCode"
+            maxLength={30}
             name="shortCode"
             value={link.shortCode}
             onChange={handleInputChange}
+            placeholder='myawsomeqr'
             required
-            className="text-gray-700 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            className="text-gray-700 max-w-2xl mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
           />
         </div>
         <div>
@@ -101,12 +100,13 @@ export default function LinkForm({ initialData }: { initialData: LinkData | null
             value={link.targetUrl}
             onChange={handleInputChange}
             required
-            className="text-gray-700 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            placeholder='http://google.com'
+            className="max-w-2xl text-gray-700 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
           />
         </div>
         <div>
           <h2 className="text-lg font-semibold mb-2">QR Code Design</h2>
-          <QRDesigner value={`${process.env.NEXT_PUBLIC_DOMAIN}/api/redirect/${link.shortCode}`} onDesignChange={handleDesignChange} />
+          <QRDesignerStyle value={`${process.env.NEXT_PUBLIC_DOMAIN}/api/redirect/${link.shortCode}`} onDesignChange={handleDesignChange} />
         </div>
         <div>
           <button
