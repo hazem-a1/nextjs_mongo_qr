@@ -57,7 +57,7 @@ export default function LinkForm({ initialData }: { initialData: LinkData | null
         const errorResponse = await response.json()
         throw new Error(errorResponse.error || 'Failed to save link');
       } 
-
+      router.refresh()
       router.push('/links');
     } catch (err) {
       setError((err as Error).message);
@@ -106,7 +106,7 @@ export default function LinkForm({ initialData }: { initialData: LinkData | null
         </div>
         <div>
           <h2 className="text-lg font-semibold mb-2">QR Code Design</h2>
-          <QRDesignerStyle value={`${process.env.NEXT_PUBLIC_DOMAIN}/api/redirect/${link.shortCode}`} onDesignChange={handleDesignChange} />
+          <QRDesignerStyle initialDesign={link.qrStyleOptions} value={`${process.env.NEXT_PUBLIC_DOMAIN}/api/redirect/${link.shortCode}`} onDesignChange={handleDesignChange} />
         </div>
         <div>
         {error && <div className="text-red-500 mb-4">{error}</div>}

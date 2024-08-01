@@ -24,5 +24,5 @@ export default async function LinkPage({ params }: { params: { id: string } }) {
     }
   }
 
-  return <LinkForm initialData={link} />;
+  return <LinkForm initialData={JSON.parse(JSON.stringify(link))} />;
 }

@@ -10,11 +10,12 @@ import { cornersDotOptions, cornersSquareOptions, defaultColor, defaultGradient,
 interface QRDesignerStyleProps {
   value: string;
   onDesignChange: (design: Options) => void;
+  initialDesign: Options
 }
 
-const QRDesignerStyle: React.FC<QRDesignerStyleProps> = ({ value, onDesignChange }) => {
+const QRDesignerStyle: React.FC<QRDesignerStyleProps> = ({ value, onDesignChange, initialDesign }) => {
 
-  const [options, setOptions] = useState<Options>(getDefaultQrOptions(value))
+  const [options, setOptions] = useState<Options>(initialDesign)
 
   const [downloadExtension, setDownloadExtension] = useState<FileExtension>("jpeg")
 
