@@ -29,7 +29,7 @@ export default function LinkForm({ initialData }: { initialData: LinkData | null
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setLink((prev) => ({ ...prev, [name]: value }));
-    if (name === "targetUrl") setLink((prev) => ({...prev, ["qrStyleOptions.data"]: value}))
+    if (name === "targetUrl") setLink((prev) => ({...prev, qrStyleOptions: {...prev.qrStyleOptions,data: value}}))
   };
 
   const handleDesignChange = (newDesign: Options) => {
@@ -71,7 +71,7 @@ export default function LinkForm({ initialData }: { initialData: LinkData | null
       <h1 className="text-2xl font-bold mb-6 ">
         {link._id ? 'Edit Link' : 'Create New Link'}
       </h1>
-      {error && <div className="text-red-500 mb-4">{error}</div>}
+      
       <form onSubmit={handleSubmit} className="space-y-4 items-center">
         <div className='items-center'>
           <label htmlFor="shortCode" className="block text-sm font-medium text-gray-300">
@@ -109,6 +109,7 @@ export default function LinkForm({ initialData }: { initialData: LinkData | null
           <QRDesignerStyle value={`${process.env.NEXT_PUBLIC_DOMAIN}/api/redirect/${link.shortCode}`} onDesignChange={handleDesignChange} />
         </div>
         <div>
+        {error && <div className="text-red-500 mb-4">{error}</div>}
           <button
             type="submit"
             disabled={isLoading}
